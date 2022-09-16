@@ -1,8 +1,8 @@
-package entities;
+package cyphers;
 
-import interfaces.Encryptable;
+import interfaces.Cypherable;
 
-public class Caesar implements Encryptable {
+public class Caesar implements Cypherable {
 
 	private int shift;
 
@@ -11,7 +11,7 @@ public class Caesar implements Encryptable {
 	}
 
 	@Override
-	public String getMethodName() {
+	public String getCypherName() {
 		return "Caesar";
 	}
 
@@ -20,33 +20,34 @@ public class Caesar implements Encryptable {
 		return shifter(source, this.shift);
 	}
 
+	@Override
+	public String decrypt(String source) {
+		return shifter(source, -this.shift);
+	}
+	
 	private String shifter(String source, int shift) {
 		StringBuilder sb = new StringBuilder();
-		source.toLowerCase();
 		for (char caracter : source.toCharArray()) {
 			if (caracter != ' ') {
 				char base = 'a';
 				int overFlow = 26;
-				if(Character.isDigit(caracter)) {
+				boolean isUpperCase = Character.isUpperCase(caracter);
+				if (Character.isDigit(caracter)) {
 					base = '0';
 					overFlow = 10;
-				}
+				} else if (isUpperCase)
+					base = 'A';
 				int newPosition = (caracter - base) + shift;
 				if (newPosition < 0) {
 					newPosition += overFlow;
 				}
 				char shifted = (char) ((newPosition % overFlow) + base);
-				sb.append(shifted);
+				sb.append(isUpperCase ? Character.toUpperCase(shifted) : shifted);
 			} else {
 				sb.append(' ');
 			}
 		}
 		return sb.toString();
-	}
-
-	@Override
-	public String decrypt(String source) {
-		return shifter(source, -this.shift);
 	}
 
 }

@@ -1,12 +1,12 @@
 package interfaces;
 
-public interface Encryptable {
+public interface Cypherable {
 
 	/**
 	 * Returns the technique name that is being implemented
 	 * @return the name
 	 */
-	public String getMethodName();
+	public String getCypherName();
 	
 	/**
 	 * Encrypts the source string
