@@ -3,7 +3,6 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import cyphers.Caesar;
 import cyphers.Swapper;
 import interfaces.Cypherable;
@@ -18,6 +17,7 @@ public class Main {
 
 		System.out.println("Cyphers!");
 		System.out.println("Please type a string that will be cyphered: ");
+		System.out.print("String: ");
 		String source = sc.nextLine();
 
 		System.out.println("\nSelect your cypher method: ");
@@ -26,6 +26,7 @@ public class Main {
 			System.out.printf("%d. %s\n", count, e.getCypherName());
 			count++;
 		}
+		System.out.print("Your option: ");
 		int selection = Integer.parseInt(sc.nextLine())-1;
 		sc.close();
 		
@@ -38,7 +39,7 @@ public class Main {
 		String encrypted = cypher.encrypt(source);
 		String decrypted = cypher.decrypt(encrypted);
 
-		System.out.printf("\t - [%s] cypher: -\n", cypher.getCypherName());
+		System.out.printf("\n\t - [%s] cypher: -\n", cypher.getCypherName());
 		System.out.printf("Original:....[%s]\n", source);
 		System.out.printf("Encrypted:...[%s]\n", encrypted);
 		System.out.printf("Decrypted:...[%s]\n", decrypted);
